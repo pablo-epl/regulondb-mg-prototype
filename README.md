@@ -2,7 +2,7 @@
 
 A navigable HTML/CSS/JS prototype exploring the evolution of RegulonDB from a mono-organism (*E. coli* K-12) resource into a scalable multi-organism platform.
 
-**Open `regulondb_mg_prototype.html` in any modern browser.** No build step, no backend, no server. The whole prototype — CSS, JS, mock data, icons — lives in that single self-contained file.
+**Open `regulondb_mg_prototype.html` via a local HTTP server** (`python3 -m http.server` from the repo root works), or just visit the live deploy. No build step, no backend.
 
 > Live version: published to GitHub Pages on every push to `main` — see [Deployment](#deployment) at the bottom of this file.
 
@@ -11,13 +11,23 @@ A navigable HTML/CSS/JS prototype exploring the evolution of RegulonDB from a mo
 ## Structure
 
 ```
-regulondb_mg_prototype.html   ← single self-contained entry (CSS + JS + assets inlined)
-index.html                    ← redirects to the canonical file (Pages serves this first)
+regulondb_mg_prototype.html   ← entry point
+regulondb/
+  tokens.css                  ← design tokens (colors, type, spacing, dark mode)
+  styles.css                  ← components & layout
+  data.js                     ← mock biological data (realistic-but-simulated)
+  icons.js                    ← SVG icons + search helper
+  views.js                    ← the views (home, gene, tf, regulon, search, compare,
+                                 pan-regulome, rri-leaderboard, downloads, summary-history)
+  app.js                      ← shell, hash router, drawer, theme, tweaks, working sets
+  assistant.js                ← scripted Q&A engine + per-page explainer data
+  assistant-ui.js             ← chat panel + FAB + explainer renderer
+index.html                    ← redirects to the entry point (Pages serves this first)
 README.md                     ← this file
 .github/workflows/deploy.yml  ← GitHub Pages deploy on push to main
 ```
 
-Internally the prototype is composed of a multi-file source (`tokens.css`, `styles.css`, `data.js`, `icons.js`, `views.js`, `app.js`, `assistant.js`, `assistant-ui.js`) — all preserved inside the single document via `window.__resources` unpacking on load. Hash routing keeps URLs shareable.
+Hash routing keeps URLs shareable (e.g. `#/ecoli-k12/gene/araC`). Opening the file directly via `file://` may fail because some browsers block module loading from local files — use a local HTTP server or the live Pages deploy.
 
 Routing uses `window.location.hash`:
 - `#/ecoli-k12/home`

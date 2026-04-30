@@ -1,0 +1,182 @@
+/* =========================================================================
+   RegulonDB Multi-Organism — Design Tokens
+   Semantic layer on top of the brand palette specified in the brief.
+   All tokens use relative units for type; spacing uses rem multiples.
+   ========================================================================= */
+
+:root {
+  /* ---- Brand palette (from brief) ---- */
+  --blue-1: #1F3D4E;   /* darkest — headers, titles */
+  --blue-2: #32617D;   /* mid-dark — links, primary CTAs */
+  --blue-3: #3D779B;   /* mid — hover, accents */
+  --blue-4: #72A7C7;   /* light — badges, soft highlights */
+  --blue-5: #D5E2EA;   /* very light — section backgrounds, cards */
+
+  --grey-1: #373737;   /* body text */
+  --grey-2: #666666;   /* secondary text */
+  --grey-3: #999999;   /* tertiary, placeholders */
+  --grey-4: #D5D5D7;   /* borders, dividers */
+  --grey-5: #F4F5F5;   /* subtle surface */
+  --rest:   #FFFFFF;   /* canvas */
+
+  --error: #C93A1D;
+  --accent: #C98528;
+  --accent-light: #D2A769;
+  --postit: #FFF8A6;
+
+  /* ---- Semantic surfaces ---- */
+  --surface-canvas: var(--rest);
+  --surface-raised: var(--rest);
+  --surface-sunken: var(--grey-5);
+  --surface-section: var(--blue-5);
+  --surface-note: var(--postit);
+  --surface-header: var(--blue-1);
+
+  /* ---- Semantic text ---- */
+  --text-primary: var(--grey-1);
+  --text-secondary: var(--grey-2);
+  --text-tertiary: var(--grey-3);
+  --text-on-dark: #ffffff;
+  --text-link: var(--blue-2);
+  --text-link-hover: var(--blue-3);
+  --text-title: var(--blue-1);
+
+  /* ---- Semantic borders ---- */
+  --border-default: var(--grey-4);
+  --border-strong: var(--grey-3);
+  --border-focus: var(--blue-3);
+  --border-subtle: #e8eaec;
+
+  /* ---- Evidence roles ---- */
+  --evidence-curated-bg: #e3ecf2;
+  --evidence-curated-fg: var(--blue-2);
+  --evidence-predicted-bg: #f6ead7;
+  --evidence-predicted-fg: #8a5a15;
+  --evidence-ht-bg: #e8e1ef;
+  --evidence-ht-fg: #5a3b86;
+  --evidence-weak-bg: #fde8e4;
+  --evidence-weak-fg: var(--error);
+
+  /* ---- Object-type accents (consistent iconography color) ---- */
+  --obj-gene: #2f6b48;
+  --obj-operon: #7a4a1e;
+  --obj-tf: #6b2f64;
+  --obj-regulon: #1a4d6b;
+  --obj-promoter: #a14522;
+  --obj-dataset: #3d4a7a;
+
+  /* ---- Typography ---- */
+  --font-sans: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-serif: "Times New Roman", Times, serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Type scale — relative (brief requires no hard px for type).
+     Base = 16px in browsers; these follow the spec sizes as rem. */
+  --fs-h1: 1.5rem;     /* 24 */
+  --fs-h2: 1.375rem;   /* 22 */
+  --fs-h3: 1.25rem;    /* 20 */
+  --fs-h4: 1.125rem;   /* 18 */
+  --fs-body-lg: 1rem;    /* 16 — "relevant text" */
+  --fs-body: 0.875rem;   /* 14 — "normal text" */
+  --fs-small: 0.8125rem; /* 13 */
+  --fs-micro: 0.75rem;   /* 12 — micro-labels only, not body */
+
+  --lh-tight: 1.25;
+  --lh-normal: 1.5;
+  --lh-loose: 1.7;
+
+  /* ---- Spacing (4/8 base) ---- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-7: 2rem;
+  --sp-8: 2.5rem;
+  --sp-9: 3rem;
+  --sp-10: 4rem;
+
+  /* ---- Radii ---- */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+
+  /* ---- Shadows (restrained, scientific) ---- */
+  --shadow-1: 0 1px 2px rgba(31, 61, 78, 0.06);
+  --shadow-2: 0 2px 6px rgba(31, 61, 78, 0.10);
+  --shadow-3: 0 8px 24px rgba(31, 61, 78, 0.14);
+
+  /* ---- Layout ---- */
+  --container-max: 1400px;
+  --header-height: 56px;
+  --subheader-height: 44px;
+  --rail-width: 220px;
+  --transition-fast: 120ms ease;
+  --transition-med: 200ms ease;
+
+  /* ---- Focus ring (WCAG AA) ---- */
+  --focus-ring: 0 0 0 2px var(--rest), 0 0 0 4px var(--blue-3);
+}
+
+/* =========================================================================
+   Dark mode — semantic tokens remapped; brand hues preserved via shift
+   ========================================================================= */
+[data-theme="dark"] {
+  --surface-canvas: #0f1b22;
+  --surface-raised: #162731;
+  --surface-sunken: #0b141a;
+  --surface-section: #1a2d38;
+  --surface-note: #4a4721;
+  --surface-header: #0a141a;
+
+  --text-primary: #e6ecef;
+  --text-secondary: #a7b4bb;
+  --text-tertiary: #7a8890;
+  --text-on-dark: #ffffff;
+  --text-link: #9cc5dc;
+  --text-link-hover: #bfdcec;
+  --text-title: #e6ecef;
+
+  --border-default: #2a3d48;
+  --border-strong: #3b5260;
+  --border-subtle: #1e2e38;
+
+  --evidence-curated-bg: #1b2e3a;
+  --evidence-curated-fg: #9cc5dc;
+  --evidence-predicted-bg: #3a2c15;
+  --evidence-predicted-fg: #e3b977;
+  --evidence-ht-bg: #2b2338;
+  --evidence-ht-fg: #c7b0e8;
+  --evidence-weak-bg: #3a1f18;
+  --evidence-weak-fg: #ef7d67;
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.5);
+  --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface-canvas: #0f1b22;
+    --surface-raised: #162731;
+    --surface-sunken: #0b141a;
+    --surface-section: #1a2d38;
+    --surface-note: #4a4721;
+    --surface-header: #0a141a;
+    --text-primary: #e6ecef;
+    --text-secondary: #a7b4bb;
+    --text-tertiary: #7a8890;
+    --text-link: #9cc5dc;
+    --text-link-hover: #bfdcec;
+    --text-title: #e6ecef;
+    --border-default: #2a3d48;
+    --border-strong: #3b5260;
+    --border-subtle: #1e2e38;
+    --evidence-curated-bg: #1b2e3a;
+    --evidence-curated-fg: #9cc5dc;
+    --evidence-predicted-bg: #3a2c15;
+    --evidence-predicted-fg: #e3b977;
+  }
+}
