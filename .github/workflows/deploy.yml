@@ -1,0 +1,51 @@
+# Publishes the standalone prototype to GitHub Pages on every push to main.
+#
+# The repo is a static site — no build step. We upload the repository root as
+# the Pages artifact and let the deploy action serve it. Pages picks up
+# index.html (which 0-second-redirects to regulondb_mg_prototype.html, the
+# canonical filename), so the live URL is just `/<repo>/`.
+#
+# To enable for the first time: Settings → Pages → Source: GitHub Actions.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Pages requires id-token (for OIDC auth between job and Pages) and pages:write.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one in-flight deploy at a time; cancel queued ones if a newer push lands.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Repo root — index.html, regulondb_mg_prototype.html, README.md.
+          # The README isn't served as content (Pages prefers index.html), but
+          # it's harmless to include in the artifact.
+          path: .
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
